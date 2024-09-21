@@ -1,0 +1,26 @@
+{
+  "name": "nestjs-auto-reflect-metadata-emitter",
+  "version": "0.0.0",
+  "main": "dist/emitter.js",
+  "scripts": {
+    "lint": "npm run lint:format && npm run lint:style",
+    "lint:fix": "npm run lint:format:fix && npm run lint:style:fix",
+    "lint:format": "prettier --check '{src,test}/**/*.ts'",
+    "lint:format:fix": "prettier --write '{src,test}/**/*.ts'",
+    "lint:style": "eslint 'src/**'",
+    "lint:style:fix": "eslint 'src/**' --fix",
+    "build": "nest build"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@nestjs/cli": "^10.4.5",
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@typescript-eslint/parser": "^6.0.0",
+    "eslint": "^8.0.0",
+    "eslint-plugin-unused-imports": "^4.1.4",
+    "prettier": "^3.3.3",
+    "typescript": "^5.6.2"
+  }
+}

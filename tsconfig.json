@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "declaration": true,
+    "strictNullChecks": true,
+    "removeComments": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "esModuleInterop": true,
+    "target": "es2023",
+    "sourceMap": true,
+    "outDir": "./dist",
+    "skipLibCheck": true,
+    "strictBindCallApply": true,
+    "noUncheckedIndexedAccess": true,
+    "noImplicitAny": true,
+  }
+}

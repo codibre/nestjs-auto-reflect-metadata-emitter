@@ -49,31 +49,8 @@ function before() {
                         ], node.name, node.questionToken ?? node.exclamationToken, node.type, node.initializer);
                     }
                     else if (tsBinary.isClassDeclaration(node)) {
-                        const classNode = tsBinary.visitEachChild(node, visitNode, ctx);
-                        const currentDecorators = tsBinary.getDecorators(classNode);
-                        if (currentDecorators)
-                            return classNode;
-                        const expression = ts.factory.createDecorator({});
-                        return tsBinary.factory.updateClassDeclaration(classNode, [
-                            ...(tsBinary.getModifiers(classNode) ?? []),
-                            {
-                                kind: typescript_1.SyntaxKind.Decorator,
-                                expression,
-                                flags: 0,
-                                end: 0,
-                                parent: classNode,
-                            },
-                        ], classNode.name, classNode.typeParameters, classNode.heritageClauses, classNode.members);
                     }
                     else if (tsBinary.isMethodDeclaration(node)) {
-                        const currentDecorators = tsBinary.getDecorators(node);
-                        if (currentDecorators)
-                            return node;
-                        const expression = ts.factory.createDecorator({});
-                        return tsBinary.factory.updateMethodDeclaration(node, [
-                            ...(tsBinary.getModifiers(node) ?? []),
-                            expression,
-                        ], node.asteriskToken, node.name, node.questionToken, node.typeParameters, node.parameters, node.type, node.body);
                     }
                     return tsBinary.visitEachChild(node, visitNode, ctx);
                 }

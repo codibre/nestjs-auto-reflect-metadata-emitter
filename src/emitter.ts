@@ -31,45 +31,45 @@ export function before() {
               node.initializer,
             );
           } else if (tsBinary.isClassDeclaration(node)) {
-            const classNode = tsBinary.visitEachChild(node, visitNode, ctx);
-            const currentDecorators = tsBinary.getDecorators(classNode);
-            if (currentDecorators) return classNode;
-            const expression = ts.factory.createDecorator({} as Expression);
-            return tsBinary.factory.updateClassDeclaration(
-              classNode,
-              [
-                ...(tsBinary.getModifiers(classNode) ?? []),
-                {
-                  kind: SyntaxKind.Decorator,
-                  expression,
-                  flags: 0,
-                  end: 0,
-                  parent: classNode,
-                },
-              ] as ts.Modifier[],
-              classNode.name,
-              classNode.typeParameters,
-              classNode.heritageClauses,
-              classNode.members,
-            );
+            // const classNode = tsBinary.visitEachChild(node, visitNode, ctx);
+            // const currentDecorators = tsBinary.getDecorators(classNode);
+            // if (currentDecorators) return classNode;
+            // const expression = ts.factory.createDecorator({} as Expression);
+            // return tsBinary.factory.updateClassDeclaration(
+            //   classNode,
+            //   [
+            //     ...(tsBinary.getModifiers(classNode) ?? []),
+            //     {
+            //       kind: SyntaxKind.Decorator,
+            //       expression,
+            //       flags: 0,
+            //       end: 0,
+            //       parent: classNode,
+            //     },
+            //   ] as ts.Modifier[],
+            //   classNode.name,
+            //   classNode.typeParameters,
+            //   classNode.heritageClauses,
+            //   classNode.members,
+            // );
           } else if (tsBinary.isMethodDeclaration(node)) {
-            const currentDecorators = tsBinary.getDecorators(node);
-            if (currentDecorators) return node;
-            const expression = ts.factory.createDecorator({} as Expression);
-            return tsBinary.factory.updateMethodDeclaration(
-              node,
-              [
-                ...(tsBinary.getModifiers(node) ?? []),
-                expression,
-              ] as ts.Modifier[],
-              node.asteriskToken,
-              node.name,
-              node.questionToken,
-              node.typeParameters,
-              node.parameters,
-              node.type,
-              node.body,
-            );
+            // const currentDecorators = tsBinary.getDecorators(node);
+            // if (currentDecorators) return node;
+            // const expression = ts.factory.createDecorator({} as Expression);
+            // return tsBinary.factory.updateMethodDeclaration(
+            //   node,
+            //   [
+            //     ...(tsBinary.getModifiers(node) ?? []),
+            //     expression,
+            //   ] as ts.Modifier[],
+            //   node.asteriskToken,
+            //   node.name,
+            //   node.questionToken,
+            //   node.typeParameters,
+            //   node.parameters,
+            //   node.type,
+            //   node.body,
+            // );
           }
           return tsBinary.visitEachChild(node, visitNode, ctx);
         } catch {

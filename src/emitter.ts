@@ -9,28 +9,29 @@ export function before() {
     return (sf: ts.SourceFile) => {
       const visitNode = (node: ts.Node): ts.Node => {
         try {
-          if ((tsBinary.isMethodDeclaration(node)
-            || tsBinary.isPropertyDeclaration(node)
-            || tsBinary.isClassDeclaration(node))
-            && !tsBinary.getDecorators(node)?.length
+          if (
+            (tsBinary.isMethodDeclaration(node) ||
+              tsBinary.isPropertyDeclaration(node) ||
+              tsBinary.isClassDeclaration(node)) &&
+            !tsBinary.getDecorators(node)?.length
           ) {
             const decorator = tsBinary.factory.createDecorator(
-              tsBinary.factory.createPropertyAccessChain(
-                tsBinary.factory.createCallExpression(
-                  tsBinary.factory.createIdentifier('require'),
-                  undefined,
-                  [
-                    tsBinary.factory.createStringLiteral('nestjs-emitter'),
-                  ]
-                ), undefined, 'simpleDecorator'
-              )
+              tsBinary.factory.createCallExpression(
+                tsBinary.factory.createIdentifier('require'),
+                undefined,
+                [
+                  tsBinary.factory.createStringLiteral(
+                    'nestjs-emitter/dist/emitter',
+                  ),
+                ],
+              ),
             );
             node = tsBinary.isClassDeclaration(node)
               ? tsBinary.visitEachChild(node, visitNode, ctx)
-              : tsBinary.factory.replaceDecoratorsAndModifiers(
-              node,
-              [...(node.modifiers ?? []), decorator]
-            );
+              : tsBinary.factory.replaceDecoratorsAndModifiers(node, [
+                  ...(node.modifiers ?? []),
+                  decorator,
+                ]);
             return node;
           }
           return tsBinary.visitEachChild(node, visitNode, ctx);

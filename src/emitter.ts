@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import * as ts from 'typescript';
-import { Expression, SyntaxKind } from 'typescript';
 import { TypeScriptBinaryLoader } from './typescript-loader';
 
 const tsBinary = new TypeScriptBinaryLoader().load();
@@ -10,66 +9,29 @@ export function before() {
     return (sf: ts.SourceFile) => {
       const visitNode = (node: ts.Node): ts.Node => {
         try {
-          if (tsBinary.isPropertyDeclaration(node)) {
-            const currentDecorators = tsBinary.getDecorators(node);
-            if (currentDecorators) return node;
-            const expression = ts.factory.createDecorator({} as Expression);
-            return tsBinary.factory.updatePropertyDeclaration(
-              node,
-              [
-                ...(tsBinary.getModifiers(node) ?? []),
-                {
-                  kind: SyntaxKind.Decorator,
-                  expression,
-                  flags: 0,
-                  end: 0,
-                },
-              ] as ts.Modifier[],
-              node.name,
-              node.questionToken ?? node.exclamationToken,
-              node.type,
-              node.initializer,
+          if ((tsBinary.isMethodDeclaration(node)
+            || tsBinary.isPropertyDeclaration(node)
+            || tsBinary.isClassDeclaration(node))
+            && !tsBinary.getDecorators(node)?.length
+          ) {
+            const decorator = tsBinary.factory.createDecorator(
+              tsBinary.factory.createPropertyAccessChain(
+                tsBinary.factory.createCallExpression(
+                  tsBinary.factory.createIdentifier('require'),
+                  undefined,
+                  [
+                    tsBinary.factory.createStringLiteral('nestjs-emitter'),
+                  ]
+                ), undefined, 'simpleDecorator'
+              )
             );
-          } else if (tsBinary.isClassDeclaration(node)) {
-            // const classNode = tsBinary.visitEachChild(node, visitNode, ctx);
-            // const currentDecorators = tsBinary.getDecorators(classNode);
-            // if (currentDecorators) return classNode;
-            // const expression = ts.factory.createDecorator({} as Expression);
-            // return tsBinary.factory.updateClassDeclaration(
-            //   classNode,
-            //   [
-            //     ...(tsBinary.getModifiers(classNode) ?? []),
-            //     {
-            //       kind: SyntaxKind.Decorator,
-            //       expression,
-            //       flags: 0,
-            //       end: 0,
-            //       parent: classNode,
-            //     },
-            //   ] as ts.Modifier[],
-            //   classNode.name,
-            //   classNode.typeParameters,
-            //   classNode.heritageClauses,
-            //   classNode.members,
-            // );
-          } else if (tsBinary.isMethodDeclaration(node)) {
-            // const currentDecorators = tsBinary.getDecorators(node);
-            // if (currentDecorators) return node;
-            // const expression = ts.factory.createDecorator({} as Expression);
-            // return tsBinary.factory.updateMethodDeclaration(
-            //   node,
-            //   [
-            //     ...(tsBinary.getModifiers(node) ?? []),
-            //     expression,
-            //   ] as ts.Modifier[],
-            //   node.asteriskToken,
-            //   node.name,
-            //   node.questionToken,
-            //   node.typeParameters,
-            //   node.parameters,
-            //   node.type,
-            //   node.body,
-            // );
+            node = tsBinary.isClassDeclaration(node)
+              ? tsBinary.visitEachChild(node, visitNode, ctx)
+              : tsBinary.factory.replaceDecoratorsAndModifiers(
+              node,
+              [...(node.modifiers ?? []), decorator]
+            );
+            return node;
           }
           return tsBinary.visitEachChild(node, visitNode, ctx);
         } catch {
@@ -79,4 +41,8 @@ export function before() {
       return tsBinary.visitNode(sf, visitNode);
     };
   };
+}
+
+export function simpleDecorator() {
+  //
 }

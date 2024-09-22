@@ -4,6 +4,10 @@ import { TypeScriptBinaryLoader } from './typescript-loader';
 
 const tsBinary = new TypeScriptBinaryLoader().load();
 
+function isStatic(node: ts.MethodDeclaration | ts.ClassDeclaration | ts.PropertyDeclaration) {
+  return node.modifiers?.find((x) => x.kind === ts.SyntaxKind.StaticKeyword);
+}
+
 export function before() {
   return (ctx: ts.TransformationContext): ts.Transformer<any> => {
     return (sf: ts.SourceFile) => {
@@ -14,6 +18,7 @@ export function before() {
               tsBinary.isPropertyDeclaration(node) ||
               tsBinary.isClassDeclaration(node)) &&
             !tsBinary.getDecorators(node)?.length
+            && !isStatic(node)
           ) {
             const decorator = tsBinary.factory.createDecorator(
               tsBinary.factory.createCallExpression(
@@ -26,13 +31,13 @@ export function before() {
                 ],
               ),
             );
-            node = tsBinary.isClassDeclaration(node)
+            node = tsBinary.factory.replaceDecoratorsAndModifiers(node, [
+              ...(node.modifiers ?? []),
+              decorator,
+            ]);
+            return tsBinary.isClassDeclaration(node)
               ? tsBinary.visitEachChild(node, visitNode, ctx)
-              : tsBinary.factory.replaceDecoratorsAndModifiers(node, [
-                  ...(node.modifiers ?? []),
-                  decorator,
-                ]);
-            return node;
+              :  node;
           }
           return tsBinary.visitEachChild(node, visitNode, ctx);
         } catch {

@@ -1,3 +1,10 @@
+## [1.0.11](https://github.com/codibre/nestjs-auto-reflect-metadata-emitter/compare/v1.0.10...v1.0.11) (2024-09-23)
+
+
+### Bug Fixes
+
+* accepting any nestjs/cli version ([9ae6e79](https://github.com/codibre/nestjs-auto-reflect-metadata-emitter/commit/9ae6e793441c93edeaf8fcc4cead295f0de2af6f))
+
 ## [1.0.10](https://github.com/codibre/nestjs-auto-reflect-metadata-emitter/compare/v1.0.9...v1.0.10) (2024-09-23)
 
 

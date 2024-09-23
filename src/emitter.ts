@@ -50,14 +50,16 @@ export function before() {
             !isStatic(node)
           ) {
             const decorator = tsBinary.factory.createDecorator(
-              tsBinary.factory.createCallExpression(
-                tsBinary.factory.createIdentifier('require'),
+              tsBinary.factory.createPropertyAccessChain(
+                tsBinary.factory.createCallExpression(
+                  tsBinary.factory.createIdentifier('require'),
+                  undefined,
+                  [
+                    tsBinary.factory.createStringLiteral('assert'),
+                  ]
+                ),
                 undefined,
-                [
-                  tsBinary.factory.createStringLiteral(
-                    'nestjs-auto-reflect-metadata-emitter/dist/simple-decorator',
-                  ),
-                ],
+                tsBinary.factory.createIdentifier('ok')
               ),
             );
             if (!tsBinary.isClassDeclaration(node)) {

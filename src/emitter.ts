@@ -19,13 +19,13 @@ export function before() {
             && !isStatic(node)
           ) {
             const decorator = tsBinary.factory.createDecorator(
-                tsBinary.factory.createCallExpression(
-                  tsBinary.factory.createIdentifier('require'),
-                  undefined,
-                  [
-                    tsBinary.factory.createStringLiteral('nestjs-emitter/dist/simple-decorator'),
-                  ]
-                )
+              tsBinary.factory.createCallExpression(
+                tsBinary.factory.createIdentifier('require'),
+                undefined,
+                [
+                  tsBinary.factory.createStringLiteral('nestjs-emitter/dist/simple-decorator'),
+                ]
+              )
             );
             node = tsBinary.factory.replaceDecoratorsAndModifiers(
               node,

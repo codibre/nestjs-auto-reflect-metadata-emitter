@@ -1,3 +1,10 @@
+## [1.0.10](https://github.com/codibre/nestjs-auto-reflect-metadata-emitter/compare/v1.0.9...v1.0.10) (2024-09-23)
+
+
+### Bug Fixes
+
+* coded added to check module existence ([a43e5c5](https://github.com/codibre/nestjs-auto-reflect-metadata-emitter/commit/a43e5c56856915e4663beb5be98b7de1499135c5))
+
 ## [1.0.9](https://github.com/codibre/nestjs-auto-reflect-metadata-emitter/compare/v1.0.8...v1.0.9) (2024-09-23)
 
 

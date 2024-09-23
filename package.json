@@ -1,6 +1,6 @@
 {
   "name": "nestjs-auto-reflect-metadata-emitter",
-  "version": "1.5.7",
+  "version": "1.0.8",
   "main": "dist/emitter.js",
   "files": [
     "dist"

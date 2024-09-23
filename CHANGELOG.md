@@ -1,3 +1,10 @@
+## [1.0.12](https://github.com/codibre/nestjs-auto-reflect-metadata-emitter/compare/v1.0.11...v1.0.12) (2024-09-23)
+
+
+### Bug Fixes
+
+* require relative path handling ([4cc87da](https://github.com/codibre/nestjs-auto-reflect-metadata-emitter/commit/4cc87da2e7f78d1d0d4890a27fa999b0f1d957b3))
+
 ## [1.0.11](https://github.com/codibre/nestjs-auto-reflect-metadata-emitter/compare/v1.0.10...v1.0.11) (2024-09-23)
 
 

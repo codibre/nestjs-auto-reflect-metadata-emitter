@@ -17,6 +17,10 @@ As I said, this is a @nestjs/cli plugin, so you need to use nest build to compil
 
 Now, to use this plugin, do the following steps:
 
+* Install the plugin:
+```
+  npm i -D nestjs-auto-reflect-metadata-emitter
+```
 * Add the plugin in the **.nest-cli.json**
 ```json
   "compilerOptions": {
@@ -31,5 +35,6 @@ Now, to use this plugin, do the following steps:
     "experimentalDecorators": true,
 ```
 * Use, at least, **typescript 5.3.3**.
+* Compile your application using nest build, and test it using nest start
 
 After compiling your project, you can check that all the compiled classes are correctly annotated, but probably still not working in most cases. Imported classes, for example, are not being correctly imported if they're only imported for typing (while decorating manually your class, it'll work). That's where I'm stuck in. I'll update the project as soon as I discover how to solve it.

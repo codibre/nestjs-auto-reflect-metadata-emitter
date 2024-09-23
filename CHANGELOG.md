@@ -1,3 +1,10 @@
+## [1.0.14](https://github.com/codibre/nestjs-auto-reflect-metadata-emitter/compare/v1.0.13...v1.0.14) (2024-09-23)
+
+
+### Bug Fixes
+
+* using assert.ok as decorator ([d92c2d0](https://github.com/codibre/nestjs-auto-reflect-metadata-emitter/commit/d92c2d06a452d3f8ba9f1cc0497c05988d4cc855))
+
 ## [1.0.13](https://github.com/codibre/nestjs-auto-reflect-metadata-emitter/compare/v1.0.12...v1.0.13) (2024-09-23)
 
 

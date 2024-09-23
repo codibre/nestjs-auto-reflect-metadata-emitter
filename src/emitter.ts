@@ -55,7 +55,7 @@ export function before() {
                 undefined,
                 [
                   tsBinary.factory.createStringLiteral(
-                    'nestjs-emitter/dist/simple-decorator',
+                    'nestjs-auto-reflect-metadata-emitter/dist/simple-decorator',
                   ),
                 ],
               ),

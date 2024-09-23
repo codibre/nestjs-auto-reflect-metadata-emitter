@@ -1,3 +1,10 @@
+## [1.0.9](https://github.com/codibre/nestjs-auto-reflect-metadata-emitter/compare/v1.0.8...v1.0.9) (2024-09-23)
+
+
+### Bug Fixes
+
+* require name ([3265816](https://github.com/codibre/nestjs-auto-reflect-metadata-emitter/commit/32658165fd9f0f765f55d6c1f8b57b73402dcbb3))
+
 ## [1.0.8](https://github.com/codibre/nestjs-auto-reflect-metadata-emitter/compare/v1.0.7...v1.0.8) (2024-09-23)
 
 

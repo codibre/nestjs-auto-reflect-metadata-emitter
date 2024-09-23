@@ -1,9 +1,14 @@
 import { existsSync } from 'fs';
+import { dirname } from 'path';
 import { getModuleRealPath } from './ts-loader';
+import ts from 'typescript';
 
-export function moduleExists(moduleName: string) {
+export function moduleExists(sf: ts.SourceFile, moduleName: string) {
   try {
-    const tsConfigTreatedModuleName = getModuleRealPath(moduleName);
+    let tsConfigTreatedModuleName = getModuleRealPath(moduleName);
+    if (!tsConfigTreatedModuleName && moduleName.startsWith('.')) {
+      tsConfigTreatedModuleName = `${dirname(sf.fileName)}/${moduleName}`;
+    }
     if (tsConfigTreatedModuleName
         && (existsSync(tsConfigTreatedModuleName)
         || existsSync(`${tsConfigTreatedModuleName}.ts`)

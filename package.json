@@ -1,6 +1,6 @@
 {
   "name": "nestjs-auto-reflect-metadata-emitter",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "main": "dist/emitter.js",
   "files": [
     "dist"
@@ -30,5 +30,12 @@
     "@nestjs/cli": "^10.4.5",
     "typescript": "^5.3.3"
   },
-  "keywords": ["typescript", "@nestjs/cli", "typing", "emitDecoratorMetadata", "metadata", "auto"]
+  "keywords": [
+    "typescript",
+    "@nestjs/cli",
+    "typing",
+    "emitDecoratorMetadata",
+    "metadata",
+    "auto"
+  ]
 }

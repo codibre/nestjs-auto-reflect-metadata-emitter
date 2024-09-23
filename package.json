@@ -28,7 +28,7 @@
     "typescript": "^5.3.3"
   },
   "peerDependencies": {
-    "@nestjs/cli": "^10.4.5",
+    "@nestjs/cli": "*",
     "typescript": "^5.3.3",
     "tsconfig-paths": "*"
   },

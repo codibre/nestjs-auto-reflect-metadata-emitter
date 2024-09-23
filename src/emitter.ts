@@ -89,7 +89,7 @@ export function before() {
       };
       const processImports = (node: ts.Node) => {
         try {
-          if (tsBinary.isImportClause(node) && mustImport.has(node) && moduleExists((node.parent.moduleSpecifier as any).text)) {
+          if (tsBinary.isImportClause(node) && mustImport.has(node) && moduleExists(sf, (node.parent.moduleSpecifier as any).text)) {
             const { namedBindings } = node;
             if (namedBindings) {
               // Hack: if a import is flagged as transient and has links.referenced = true,

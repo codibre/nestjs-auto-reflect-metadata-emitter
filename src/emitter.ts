@@ -1,9 +1,9 @@
 /* eslint-disable no-bitwise */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import * as ts from 'typescript';
-import { TypeScriptBinaryLoader } from './typescript-loader';
+import { moduleExists } from './module-exists';
+import { tsBinary } from './ts-loader';
 
-const tsBinary = new TypeScriptBinaryLoader().load();
 function isStatic(
   node: ts.MethodDeclaration | ts.ClassDeclaration | ts.PropertyDeclaration,
 ) {
@@ -89,7 +89,7 @@ export function before() {
       };
       const processImports = (node: ts.Node) => {
         try {
-          if (tsBinary.isImportClause(node) && mustImport.has(node)) {
+          if (tsBinary.isImportClause(node) && mustImport.has(node) && moduleExists((node.parent.moduleSpecifier as any).text)) {
             const { namedBindings } = node;
             if (namedBindings) {
               // Hack: if a import is flagged as transient and has links.referenced = true,

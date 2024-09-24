@@ -1,3 +1,10 @@
+## [1.1.1](https://github.com/codibre/nestjs-auto-reflect-metadata-emitter/compare/v1.1.0...v1.1.1) (2024-09-24)
+
+
+### Bug Fixes
+
+* emitting data to static and already decorated items ([ae099c6](https://github.com/codibre/nestjs-auto-reflect-metadata-emitter/commit/ae099c6d974ed4b892f9271c2ce60cc3b2777ba0))
+
 # [1.1.0](https://github.com/codibre/nestjs-auto-reflect-metadata-emitter/compare/v1.0.15...v1.1.0) (2024-09-24)
 
 

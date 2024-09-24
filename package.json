@@ -1,9 +1,10 @@
 {
   "name": "nestjs-auto-reflect-metadata-emitter",
   "version": "1.0.14",
-  "main": "dist/emitter.js",
+  "main": "dist/index.js",
   "files": [
-    "dist"
+    "dist",
+    "index.js"
   ],
   "scripts": {
     "lint": "npm run lint:format && npm run lint:style",
@@ -24,13 +25,29 @@
     "eslint": "^8.0.0",
     "eslint-plugin-unused-imports": "^4.1.4",
     "prettier": "^3.3.3",
+    "reflect-metadata": "^0.1.0",
     "tsconfig-paths": "^4.2.0",
     "typescript": "^5.3.3"
   },
   "peerDependencies": {
     "@nestjs/cli": "*",
+    "reflect-metadata": "*",
     "tsconfig-paths": "*",
     "typescript": "^5.3.3"
+  },
+  "contributors": [
+    "Thiago O Santos <tos.oliveira@gmail.com>"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/codibre/nestjs-auto-reflect-metadata-emitter"
+  },
+  "homepage": "https://codibre.github.io/nestjs-auto-reflect-metadata-emitter",
+  "bugs": {
+    "url": "https://github.com/codibre/nestjs-auto-reflect-metadata-emitter/issues"
   },
   "keywords": [
     "typescript",

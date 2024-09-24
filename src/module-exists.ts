@@ -9,11 +9,14 @@ export function moduleExists(sf: ts.SourceFile, moduleName: string) {
     if (!tsConfigTreatedModuleName && moduleName.startsWith('.')) {
       tsConfigTreatedModuleName = `${dirname(sf.fileName)}/${moduleName}`;
     }
-    if (tsConfigTreatedModuleName
-        && (existsSync(tsConfigTreatedModuleName)
-        || existsSync(`${tsConfigTreatedModuleName}.ts`)
-        || existsSync(`${tsConfigTreatedModuleName}.js`))
-    ) return true;
+    if (
+      tsConfigTreatedModuleName &&
+      (existsSync(tsConfigTreatedModuleName) ||
+        existsSync(`${tsConfigTreatedModuleName}.ts`) ||
+        existsSync(`${tsConfigTreatedModuleName}.js`))
+    ) {
+      return true;
+    }
     require(tsConfigTreatedModuleName ?? moduleName);
     return true;
   } catch {

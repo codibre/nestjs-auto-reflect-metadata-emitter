@@ -14,17 +14,25 @@ type TypedNode = Pick<ts.ParameterDeclaration, 'type'>;
 
 type NodeWithParameters = Pick<ts.MethodDeclaration, 'parameters'>;
 
-function addRef(p: TypedNode, imports: Map<any, any>, mustImport: Set<unknown>) {
+function addRef(
+  p: TypedNode,
+  imports: Map<any, any>,
+  mustImport: Set<unknown>,
+) {
   if (p.type) {
     const ref = imports.get(p.type.getText());
     if (ref) mustImport.add(ref);
   }
 }
 
-function addParameterRefs(node: NodeWithParameters, imports: Map<any, any>, mustImport: Set<unknown>) {
-for (const p of node.parameters) {
-  addRef(p, imports, mustImport);
-}
+function addParameterRefs(
+  node: NodeWithParameters,
+  imports: Map<any, any>,
+  mustImport: Set<unknown>,
+) {
+  for (const p of node.parameters) {
+    addRef(p, imports, mustImport);
+  }
 }
 export function before() {
   return (ctx: ts.TransformationContext): ts.Transformer<any> => {
@@ -49,25 +57,17 @@ export function before() {
             !tsBinary.getDecorators(node)?.length &&
             !isStatic(node)
           ) {
-            const decorator = tsBinary.factory.createDecorator(
-              tsBinary.factory.createPropertyAccessChain(
-                tsBinary.factory.createCallExpression(
-                  tsBinary.factory.createIdentifier('require'),
-                  undefined,
-                  [
-                    tsBinary.factory.createStringLiteral('assert'),
-                  ]
-                ),
-                undefined,
-                tsBinary.factory.createIdentifier('ok')
-              ),
-            );
+            let identifier: string;
             if (!tsBinary.isClassDeclaration(node)) {
               if (node.type) addRef(node, imports, mustImport);
               if (tsBinary.isMethodDeclaration(node)) {
-                  addParameterRefs(node, imports, mustImport);
+                addParameterRefs(node, imports, mustImport);
+                identifier = 'registerMethodMetadata';
+              } else {
+                identifier = 'registerPropertyMetadata';
               }
             } else {
+              identifier = 'registerClassMetadata';
               for (const member of node.members) {
                 if (tsBinary.isConstructorDeclaration(member)) {
                   addParameterRefs(member, imports, mustImport);
@@ -75,6 +75,21 @@ export function before() {
                 }
               }
             }
+            const decorator = tsBinary.factory.createDecorator(
+              tsBinary.factory.createPropertyAccessChain(
+                tsBinary.factory.createCallExpression(
+                  tsBinary.factory.createIdentifier('require'),
+                  undefined,
+                  [
+                    tsBinary.factory.createStringLiteral(
+                      'nestjs-auto-reflect-metadata-emitter',
+                    ),
+                  ],
+                ),
+                undefined,
+                tsBinary.factory.createIdentifier(identifier),
+              ),
+            );
             node = tsBinary.factory.replaceDecoratorsAndModifiers(node, [
               ...(node.modifiers ?? []),
               decorator,
@@ -91,7 +106,11 @@ export function before() {
       };
       const processImports = (node: ts.Node) => {
         try {
-          if (tsBinary.isImportClause(node) && mustImport.has(node) && moduleExists(sf, (node.parent.moduleSpecifier as any).text)) {
+          if (
+            tsBinary.isImportClause(node) &&
+            mustImport.has(node) &&
+            moduleExists(sf, (node.parent.moduleSpecifier as any).text)
+          ) {
             const { namedBindings } = node;
             if (namedBindings) {
               // Hack: if a import is flagged as transient and has links.referenced = true,

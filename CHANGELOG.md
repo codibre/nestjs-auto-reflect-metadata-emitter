@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/codibre/nestjs-auto-reflect-metadata-emitter/compare/v1.1.1...v1.2.0) (2024-09-24)
+
+
+### Features
+
+* creating decorator helpers ([cfcaa9d](https://github.com/codibre/nestjs-auto-reflect-metadata-emitter/commit/cfcaa9dc2468e396d9b87447a67ee34c91b16884))
+
 ## [1.1.1](https://github.com/codibre/nestjs-auto-reflect-metadata-emitter/compare/v1.1.0...v1.1.1) (2024-09-24)
 
 

@@ -4,7 +4,7 @@
   "main": "dist/index.js",
   "files": [
     "dist",
-    "index.js"
+    "plugin.js"
   ],
   "scripts": {
     "lint": "npm run lint:format && npm run lint:style",
@@ -13,17 +13,21 @@
     "lint:format:fix": "prettier --write '{src,test}/**/*.ts'",
     "lint:style": "eslint 'src/**'",
     "lint:style:fix": "eslint 'src/**' --fix",
-    "build": "nest build"
+    "build": "nest build",
+    "prepare": "husky"
   },
   "author": "",
   "license": "ISC",
   "description": "",
   "devDependencies": {
     "@nestjs/cli": "^10.4.5",
+    "@types/lint-staged": "^13.3.0",
     "@typescript-eslint/eslint-plugin": "^6.0.0",
     "@typescript-eslint/parser": "^6.0.0",
     "eslint": "^8.0.0",
     "eslint-plugin-unused-imports": "^4.1.4",
+    "husky": "^9.1.6",
+    "lint-staged": "^15.2.10",
     "prettier": "^3.3.3",
     "reflect-metadata": "^0.1.0",
     "tsconfig-paths": "^4.2.0",

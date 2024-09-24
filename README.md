@@ -25,7 +25,7 @@ Now, to use this plugin, do the following steps:
 ```json
   "compilerOptions": {
     "plugins": [
-      "nestjs-auto-reflect-metadata-emitter"
+      "nestjs-auto-reflect-metadata-emitter/plugin"
     ]
   }
 ```
@@ -46,9 +46,8 @@ Finally, metadata may be a sensitive data of your application, so, you can erase
 ## What we're not doing yet.
 
 * We're not generating metadata of get and set accessors;
-* We're not discriminating between private and public properties;
 
-Those are points of evolution of this library and we'll address them as soon as possible. If you have any suggestions or contributions to do, feel free to contact us!
+This is a point of evolution of this library and we'll address them as soon as possible. If you have any suggestions or contributions to do, feel free to contact us!
 
 ## How to use it with Jest?
 
@@ -60,7 +59,7 @@ You can set the transformer of this library to run with jest following the examp
         "ts-jest",
         {
           "astTransformers": {
-            "before": ["node_modules/nestjs-auto-reflect-metadata-emitter"]
+            "before": ["node_modules/nestjs-auto-reflect-metadata-emitter/plugin"]
           }
         }
       ]

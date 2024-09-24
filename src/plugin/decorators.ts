@@ -10,6 +10,8 @@ import {
 } from '../meta-type';
 
 const metadata = getMetadataStorage();
+const metadataSymbol = Symbol('metadataSymbol');
+const metadataMarker = { [metadataSymbol]: true };
 
 function getMeta<T extends object = object>(prototype: T) {
   let ref = metadata.get(prototype) as ClassMetadata<T> | undefined;
@@ -19,9 +21,16 @@ function getMeta<T extends object = object>(prototype: T) {
       properties: new Map<Key<T>, PropertyMetadata>(),
       methods: new Map<Key<T>, MethodMetadata>(),
     };
+    Object.assign(ref, metadataMarker);
     metadata.set(prototype, ref as unknown as ClassMetadata<object>);
   }
   return ref;
+}
+
+export function isMetadata<T extends object = object>(
+  ref: unknown,
+): ref is ClassMetadata<T> {
+  return typeof ref === 'object' && !!ref && metadataSymbol in ref;
 }
 
 export function registerClassMetadata(modifiers: ModifiersMetadata) {

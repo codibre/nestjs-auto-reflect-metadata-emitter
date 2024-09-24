@@ -43,11 +43,7 @@ Metadata of all classes is accessible through the method **getClassMetadata**, w
 You can also iterate over all metadata registered through **iterateMetadata**.
 Finally, metadata may be a sensitive data of your application, so, you can erase all its information using **clearAllMetadata**. We recommend you to do so, if you use this library, don't keep any hard logic depending on what this package will register, just construct whenever you need and clear it all at the end.
 
-## What we're not doing yet.
 
-* We're not generating metadata of get and set accessors;
-
-This is a point of evolution of this library and we'll address them as soon as possible. If you have any suggestions or contributions to do, feel free to contact us!
 
 ## How to use it with Jest?
 
@@ -67,3 +63,44 @@ You can set the transformer of this library to run with jest following the examp
 ```
 
 This will be enough to make it apply it during transpilation.
+
+## Helpers to apply decorators
+
+One of the advantages of having all this metadata emitted is that you can apply decorators for existing classes in separated scopes! To do that, there're two helper functions this library offers:
+
+the first one is **applyPropertyAndMethodsDecorators**:
+```ts
+applyPropertyAndMethodsDecorators(MyClass, {
+  prop1: [
+    @ApiProperty({
+      example: '123'
+    })
+  ],
+  prop2: [
+    @ApiProperty()
+    @IsEnum(MyEnum)
+  ],
+  [DEFAULT]: [@ApiProperty()]
+})
+```
+
+Notice the symbol **DEFAULT**, it's a symbol imported from our library and serves to purpose of define a decorator that'll be applied to every property or method that doesn't have a specific set os decorators informed. This second parameter is a strongly typed object and it'll only allow names of properties and methods of MyClass (static or not), or the **DEFAULT** symbol.
+Executing this code will have the same effect as applying the decorators directly in the class.
+
+The second helper method is simpler, **applyClassDecorators**:
+
+```ts
+applyClassDecorators(MyClass, [
+    @Model()
+    @PrimaryKey({ field1: 1, field2: 2 })
+  ]
+})
+```
+
+This one will apply the decorators to the class itself, not its properties.
+
+## What we're not doing yet.
+
+* We're not generating metadata of get and set accessors;
+
+This is a point of evolution of this library and we'll address them as soon as possible. If you have any suggestions or contributions to do, feel free to contact us!

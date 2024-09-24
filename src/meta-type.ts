@@ -2,7 +2,8 @@ export type ClassType<T extends object = object> = abstract new (
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   ...args: any[]
 ) => T;
-export type Key<T extends object = object> = keyof T | keyof ClassType<T>;
+export type Key<T extends object = object> = (keyof T | keyof ClassType<T>) &
+  (string | symbol);
 
 export interface ModifiersMetadata {
   public: boolean;

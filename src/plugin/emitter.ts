@@ -27,7 +27,9 @@ function* emitPropertyAssignments<T extends object = object>(
     if (k in obj) {
       yield tsBinary.factory.createPropertyAssignment(
         k,
-        obj[k] ? tsBinary.factory.createTrue() : tsBinary.factory.createFalse(),
+        obj[k as Key<T>]
+          ? tsBinary.factory.createTrue()
+          : tsBinary.factory.createFalse(),
       );
     }
   }

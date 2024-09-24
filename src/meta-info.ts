@@ -8,8 +8,10 @@ const metadata = getMetadataStorage();
  * Return metadata of the class informed, or undefined if there is none
  * @param cls The Class to get metadata from
  */
-export function getClassMetadata(cls: ClassType): ClassMetadata | undefined {
-  return metadata.get(cls.prototype);
+export function getClassMetadata<T extends object = object>(
+  cls: ClassType<T>,
+): ClassMetadata<T> | undefined {
+  return metadata.get(cls.prototype) as ClassMetadata<T> | undefined;
 }
 
 /**

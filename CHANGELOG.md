@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/codibre/nestjs-auto-reflect-metadata-emitter/compare/v1.0.15...v1.1.0) (2024-09-24)
+
+
+### Features
+
+* adding modifiers metadata ([71cb319](https://github.com/codibre/nestjs-auto-reflect-metadata-emitter/commit/71cb319a7be0c026bf29c7ee615937dbfec76908))
+
 ## [1.0.15](https://github.com/codibre/nestjs-auto-reflect-metadata-emitter/compare/v1.0.14...v1.0.15) (2024-09-24)
 
 

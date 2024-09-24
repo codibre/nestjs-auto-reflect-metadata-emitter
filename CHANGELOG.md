@@ -1,3 +1,10 @@
+## [1.0.15](https://github.com/codibre/nestjs-auto-reflect-metadata-emitter/compare/v1.0.14...v1.0.15) (2024-09-24)
+
+
+### Bug Fixes
+
+* adding access api ([eff2f49](https://github.com/codibre/nestjs-auto-reflect-metadata-emitter/commit/eff2f49c22b6c4d533a9ec5194de84dd3e03dcd3))
+
 ## [1.0.14](https://github.com/codibre/nestjs-auto-reflect-metadata-emitter/compare/v1.0.13...v1.0.14) (2024-09-23)
 
 

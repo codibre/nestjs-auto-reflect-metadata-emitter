@@ -37,4 +37,34 @@ Now, to use this plugin, do the following steps:
 * Use, at least, **typescript 5.3.3**.
 * Compile your application using nest build, and test it using nest start
 
-After compiling your project, you can check that all the compiled classes are correctly annotated, but probably still not working in most cases. Imported classes, for example, are not being correctly imported if they're only imported for typing (while decorating manually your class, it'll work). That's where I'm stuck in. I'll update the project as soon as I discover how to solve it.
+## How to access metadata
+
+Metadata of all classes is accessible through the method **getClassMetadata**, where you just need to inform the class which you want the metadata of.
+You can also iterate over all metadata registered through **iterateMetadata**.
+Finally, metadata may be a sensitive data of your application, so, you can erase all its information using **clearAllMetadata**. We recommend you to do so, if you use this library, don't keep any hard logic depending on what this package will register, just construct whenever you need and clear it all at the end.
+
+## What we're not doing yet.
+
+* We're not generating metadata of get and set accessors;
+* We're not discriminating between private and public properties;
+
+Those are points of evolution of this library and we'll address them as soon as possible. If you have any suggestions or contributions to do, feel free to contact us!
+
+## How to use it with Jest?
+
+You can set the transformer of this library to run with jest following the example below:
+
+```json
+"transform": {
+      "^.+\\.(t|j)s$": [
+        "ts-jest",
+        {
+          "astTransformers": {
+            "before": ["node_modules/nestjs-auto-reflect-metadata-emitter"]
+          }
+        }
+      ]
+    }
+```
+
+This will be enough to make it apply it during transpilation.

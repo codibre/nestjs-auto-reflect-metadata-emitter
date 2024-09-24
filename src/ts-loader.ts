@@ -11,9 +11,7 @@ export const tsConfig = tsConfigProvider.getByConfigFilename('tsconfig.json');
 const { paths = {}, baseUrl = './' } = tsConfig.options;
 export const matcher = tsPaths.createMatchPath(baseUrl, paths, ['main']);
 
-export function getModuleRealPath(
-  text: string,
-) {
+export function getModuleRealPath(text: string) {
   let result = matcher(text, undefined, undefined, [
     '.ts',
     '.tsx',

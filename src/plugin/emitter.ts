@@ -5,12 +5,6 @@ import { moduleExists } from './module-exists';
 import { tsBinary } from './ts-loader';
 import { Key, ModifiersMetadata } from '../meta-type';
 
-function isStatic(
-  node: ts.MethodDeclaration | ts.ClassDeclaration | ts.PropertyDeclaration,
-) {
-  return node.modifiers?.find((x) => x.kind === ts.SyntaxKind.StaticKeyword);
-}
-
 type TypedNode = Pick<ts.ParameterDeclaration, 'type'>;
 
 type NodeWithParameters = Pick<ts.MethodDeclaration, 'parameters'>;
@@ -89,11 +83,9 @@ export function before() {
               }
             }
           } else if (
-            (tsBinary.isMethodDeclaration(node) ||
-              tsBinary.isPropertyDeclaration(node) ||
-              tsBinary.isClassDeclaration(node)) &&
-            !tsBinary.getDecorators(node)?.length &&
-            !isStatic(node)
+            tsBinary.isMethodDeclaration(node) ||
+            tsBinary.isPropertyDeclaration(node) ||
+            tsBinary.isClassDeclaration(node)
           ) {
             let identifier: string;
             const modifiers = getProperties(node);

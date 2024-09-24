@@ -1,6 +1,8 @@
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export type ClassType = abstract new (...args: any[]) => unknown;
-export type Key = string | symbol;
+export type ClassType<T extends object = object> = abstract new (
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  ...args: any[]
+) => T;
+export type Key<T extends object = object> = keyof T | keyof ClassType<T>;
 
 export interface ModifiersMetadata {
   public: boolean;
@@ -20,23 +22,26 @@ export interface BaseMetadata {
   modifiers: ModifiersMetadata;
 }
 
-export interface ConstructorMetadata extends BaseMetadata {
-  cls: ClassType;
+export interface ConstructorMetadata<T extends object = object>
+  extends BaseMetadata {
+  cls: ClassType<T>;
   args: unknown[];
 }
-export interface MethodMetadata extends BaseMetadata {
-  name: Key;
+export interface MethodMetadata<T extends object = object>
+  extends BaseMetadata {
+  name: Key<T>;
   args: unknown[];
   returnType: unknown;
   propertyDescriptor: PropertyDescriptor;
 }
-export interface PropertyMetadata extends BaseMetadata {
-  name: Key;
+export interface PropertyMetadata<T extends object = object>
+  extends BaseMetadata {
+  name: Key<T>;
   type: unknown;
 }
 
-export interface ClassMetadata {
-  ctor: ConstructorMetadata;
-  properties: Map<Key, PropertyMetadata>;
-  methods: Map<Key, MethodMetadata>;
+export interface ClassMetadata<T extends object = object> {
+  ctor: ConstructorMetadata<T>;
+  properties: Map<Key<T>, PropertyMetadata<T>>;
+  methods: Map<Key<T>, MethodMetadata<T>>;
 }

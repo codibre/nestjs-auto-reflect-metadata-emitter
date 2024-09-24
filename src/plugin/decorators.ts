@@ -1,22 +1,25 @@
 import { getMetadataStorage } from '../internal';
 import {
+  ClassMetadata,
   ClassType,
   ConstructorMetadata,
   Key,
+  MethodMetadata,
   ModifiersMetadata,
+  PropertyMetadata,
 } from '../meta-type';
 
 const metadata = getMetadataStorage();
 
-function getMeta(prototype: object) {
-  let ref = metadata.get(prototype);
+function getMeta<T extends object = object>(prototype: T) {
+  let ref = metadata.get(prototype) as ClassMetadata<T> | undefined;
   if (!ref) {
     ref = {
-      ctor: undefined as unknown as ConstructorMetadata,
-      properties: new Map(),
-      methods: new Map(),
+      ctor: undefined as unknown as ConstructorMetadata<T>,
+      properties: new Map<Key<T>, PropertyMetadata>(),
+      methods: new Map<Key<T>, MethodMetadata>(),
     };
-    metadata.set(prototype, ref);
+    metadata.set(prototype, ref as unknown as ClassMetadata<object>);
   }
   return ref;
 }
@@ -45,13 +48,11 @@ export function registerPropertyMetadata(modifiers: ModifiersMetadata) {
   };
 }
 
-export function registerMethodMetadata(modifiers: ModifiersMetadata) {
-  return (
-    prototype: object,
-    key: Key,
-    propertyDescriptor: PropertyDescriptor,
-  ) => {
-    const ref = getMeta(prototype);
+export function registerMethodMetadata<T extends object = object>(
+  modifiers: ModifiersMetadata,
+) {
+  return (prototype: T, key: Key, propertyDescriptor: PropertyDescriptor) => {
+    const ref = getMeta<T>(prototype);
     const returnType = Reflect.getMetadata('design:returntype', prototype, key);
     ref.methods.set(key, {
       name: key,

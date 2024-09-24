@@ -20,7 +20,9 @@ function addRef(
   }
 }
 
-function* emitPropertyAssignments(obj: Record<Key, boolean>) {
+function* emitPropertyAssignments<T extends object = object>(
+  obj: Record<Key<T>, boolean>,
+) {
   for (const k in obj) {
     if (k in obj) {
       yield tsBinary.factory.createPropertyAssignment(

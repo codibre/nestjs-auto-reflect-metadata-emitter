@@ -3,6 +3,7 @@
 import * as ts from 'typescript';
 import { moduleExists } from './module-exists';
 import { tsBinary } from './ts-loader';
+import { Key, ModifiersMetadata } from '../meta-type';
 
 function isStatic(
   node: ts.MethodDeclaration | ts.ClassDeclaration | ts.PropertyDeclaration,
@@ -23,6 +24,43 @@ function addRef(
     const ref = imports.get(p.type.getText());
     if (ref) mustImport.add(ref);
   }
+}
+
+function* emitPropertyAssignments(obj: Record<Key, boolean>) {
+  for (const k in obj) {
+    if (k in obj) {
+      yield tsBinary.factory.createPropertyAssignment(
+        k,
+        obj[k] ? tsBinary.factory.createTrue() : tsBinary.factory.createFalse(),
+      );
+    }
+  }
+}
+
+function getProperties(node: ts.HasModifiers): ts.ObjectLiteralElementLike[] {
+  const modifiers = new Set<ts.Modifier['kind']>();
+  for (const modifier of tsBinary.getModifiers(node) ?? []) {
+    modifiers.add(modifier.kind);
+  }
+  const access = {
+    private: modifiers.has(ts.SyntaxKind.PrivateKeyword),
+    protected: modifiers.has(ts.SyntaxKind.ProtectedKeyword),
+  };
+  const properties: ModifiersMetadata = {
+    exported: modifiers.has(ts.SyntaxKind.ExportKeyword),
+    ...access,
+    public: !access.private && !access.protected,
+    readonly: modifiers.has(ts.SyntaxKind.ReadonlyKeyword),
+    static: modifiers.has(ts.SyntaxKind.StaticKeyword),
+    abstract: modifiers.has(ts.SyntaxKind.AbstractKeyword),
+    accessor: modifiers.has(ts.SyntaxKind.AccessorKeyword),
+    async: modifiers.has(ts.SyntaxKind.AsyncKeyword),
+    const: modifiers.has(ts.SyntaxKind.ConstKeyword),
+    override: modifiers.has(ts.SyntaxKind.OverrideKeyword),
+  };
+  return [
+    ...emitPropertyAssignments(properties as unknown as Record<Key, boolean>),
+  ];
 }
 
 function addParameterRefs(
@@ -58,6 +96,7 @@ export function before() {
             !isStatic(node)
           ) {
             let identifier: string;
+            const modifiers = getProperties(node);
             if (!tsBinary.isClassDeclaration(node)) {
               if (node.type) addRef(node, imports, mustImport);
               if (tsBinary.isMethodDeclaration(node)) {
@@ -75,21 +114,26 @@ export function before() {
                 }
               }
             }
-            const decorator = tsBinary.factory.createDecorator(
-              tsBinary.factory.createPropertyAccessChain(
-                tsBinary.factory.createCallExpression(
-                  tsBinary.factory.createIdentifier('require'),
-                  undefined,
-                  [
-                    tsBinary.factory.createStringLiteral(
-                      'nestjs-auto-reflect-metadata-emitter',
-                    ),
-                  ],
+            const requireCall = tsBinary.factory.createCallExpression(
+              tsBinary.factory.createIdentifier('require'),
+              undefined,
+              [
+                tsBinary.factory.createStringLiteral(
+                  'nestjs-auto-reflect-metadata-emitter/plugin',
                 ),
-                undefined,
-                tsBinary.factory.createIdentifier(identifier),
-              ),
+              ],
             );
+            const decoratorAccess = tsBinary.factory.createPropertyAccessChain(
+              requireCall,
+              undefined,
+              tsBinary.factory.createIdentifier(identifier),
+            );
+            const decoratorCall = tsBinary.factory.createCallExpression(
+              decoratorAccess,
+              undefined,
+              [tsBinary.factory.createObjectLiteralExpression(modifiers)],
+            );
+            const decorator = tsBinary.factory.createDecorator(decoratorCall);
             node = tsBinary.factory.replaceDecoratorsAndModifiers(node, [
               ...(node.modifiers ?? []),
               decorator,

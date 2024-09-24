@@ -1,0 +1,4 @@
+{
+  "*.ts": "npm run lint:fix",
+  "*.js": "npm run lint:fix"
+}

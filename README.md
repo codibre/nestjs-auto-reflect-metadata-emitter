@@ -1,3 +1,11 @@
+[![Actions Status](https://github.com/Codibre/nestjs-auto-reflect-metadata-emitter/workflows/build/badge.svg)](https://github.com/Codibre/nestjs-auto-reflect-metadata-emitter/actions)
+[![Actions Status](https://github.com/Codibre/nestjs-auto-reflect-metadata-emitter/workflows/test-coverage/badge.svg)](https://github.com/Codibre/nestjs-auto-reflect-metadata-emitter/actions)
+[![Actions Status](https://github.com/Codibre/nestjs-auto-reflect-metadata-emitter/workflows/lint/badge.svg)](https://github.com/Codibre/nestjs-auto-reflect-metadata-emitter/actions)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/9c5d5262333faef1e8d1/test_coverage)](https://codeclimate.com/github/codibre/nestjs-auto-reflect-metadata-emitter/test_coverage)
+[![Maintainability](https://api.codeclimate.com/v1/badges/9c5d5262333faef1e8d1/maintainability)](https://codeclimate.com/github/codibre/nestjs-auto-reflect-metadata-emitter/maintainability)
+![downloads per month](https://img.shields.io/npm/dm/nestjs-auto-reflect-metadata-emitter)
+[![semantic-release: angular](https://img.shields.io/badge/semantic--release-angular-e10079?logo=semantic-release)](https://github.com/semantic-release/semantic-release)
+
 # nestjs-auto-reflect-metadata-emitter
 
 So, I got this crazy idea of making every class, property and method emitted through reflect-metadata when compiling a trypescript code.

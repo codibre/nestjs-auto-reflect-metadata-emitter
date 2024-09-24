@@ -14,7 +14,9 @@
     "lint:style": "eslint 'src/**'",
     "lint:style:fix": "eslint 'src/**' --fix",
     "build": "nest build",
-    "prepare": "husky"
+    "prepare": "husky",
+    "test": "jest test/unit",
+    "test:coverage": "jest test/unit --coverage"
   },
   "author": "",
   "license": "ISC",

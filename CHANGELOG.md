@@ -1,3 +1,10 @@
+## [1.2.2](https://github.com/codibre/nestjs-auto-reflect-metadata-emitter/compare/v1.2.1...v1.2.2) (2024-09-24)
+
+
+### Bug Fixes
+
+* adding badges ([215b583](https://github.com/codibre/nestjs-auto-reflect-metadata-emitter/commit/215b5833c5b1b356dff99ad8a04a80619c4baa0b))
+
 ## [1.2.1](https://github.com/codibre/nestjs-auto-reflect-metadata-emitter/compare/v1.2.0...v1.2.1) (2024-09-24)
 
 

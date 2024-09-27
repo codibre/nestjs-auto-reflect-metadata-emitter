@@ -4,6 +4,7 @@
   "main": "dist/index.js",
   "files": [
     "dist",
+    "decorator.js",
     "plugin.js"
   ],
   "scripts": {
@@ -36,10 +37,7 @@
     "typescript": "^5.3.3"
   },
   "peerDependencies": {
-    "@nestjs/cli": "*",
-    "reflect-metadata": "*",
-    "tsconfig-paths": "*",
-    "typescript": "^5.3.3"
+    "reflect-metadata": "*"
   },
   "contributors": [
     "Thiago O Santos <tos.oliveira@gmail.com>"

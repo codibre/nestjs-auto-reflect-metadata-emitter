@@ -115,7 +115,7 @@ export function before() {
               undefined,
               [
                 tsBinary.factory.createStringLiteral(
-                  'nestjs-auto-reflect-metadata-emitter/plugin',
+                  'nestjs-auto-reflect-metadata-emitter/decorators',
                 ),
               ],
             );

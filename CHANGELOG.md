@@ -1,3 +1,10 @@
+## [1.2.5](https://github.com/codibre/nestjs-auto-reflect-metadata-emitter/compare/v1.2.4...v1.2.5) (2024-09-27)
+
+
+### Bug Fixes
+
+* removing typescript as dependency ([b40ee81](https://github.com/codibre/nestjs-auto-reflect-metadata-emitter/commit/b40ee81c7a3da4f16a098b47dd0ed8b25760d46f))
+
 ## [1.2.4](https://github.com/codibre/nestjs-auto-reflect-metadata-emitter/compare/v1.2.3...v1.2.4) (2024-09-27)
 
 

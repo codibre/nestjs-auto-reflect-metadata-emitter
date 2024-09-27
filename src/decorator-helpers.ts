@@ -1,7 +1,7 @@
 import { getProperMetadataTarget } from './internal/get-proper-metadata-target';
 import { getClassMetadata } from './meta-info';
 import { ClassMetadata, ClassType, Key } from './meta-type';
-import { isMetadata } from './plugin';
+import { isMetadata } from './plugin/decorators';
 
 export const DEFAULT = Symbol('default');
 

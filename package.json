@@ -4,7 +4,7 @@
   "main": "dist/index.js",
   "files": [
     "dist",
-    "decorator.js",
+    "decorators.js",
     "plugin.js"
   ],
   "scripts": {

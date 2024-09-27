@@ -1,3 +1,10 @@
+## [1.2.3](https://github.com/codibre/nestjs-auto-reflect-metadata-emitter/compare/v1.2.2...v1.2.3) (2024-09-27)
+
+
+### Bug Fixes
+
+* making tsconfig-paths dev dependency ([6cca1a1](https://github.com/codibre/nestjs-auto-reflect-metadata-emitter/commit/6cca1a1dedd468348249775e33313973f63aad9a))
+
 ## [1.2.2](https://github.com/codibre/nestjs-auto-reflect-metadata-emitter/compare/v1.2.1...v1.2.2) (2024-09-24)
 
 

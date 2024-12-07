@@ -107,6 +107,19 @@ applyClassDecorators(MyClass, [
 
 This one will apply the decorators to the class itself, not its properties.
 
+## How to simplify my nestjs project avoiding nestjs decorators into the domain
+
+Using this plugin totally avoids the need to use the **@Injectable()** decorator, so, that's make a lot of nestjs references be avoidable into the application and domain layer. Some of them, alike CommandHandler, is still needed, though, but you can set them up at other place (when specifying the module, for example), with a function like this:
+
+```ts
+export function prepareCommandHandlers(handlers: ClassType<ICommandHandler>[]) {
+  for (const cls of handlers) {
+    const command = getClassMetadata(cls)?.methods.get('execute')?.args[0];
+    if (command) applyClassDecorators(cls, [CommandHandler(command)])
+  }
+}
+```
+
 ## What we're not doing yet.
 
 * We're not generating metadata of get and set accessors;

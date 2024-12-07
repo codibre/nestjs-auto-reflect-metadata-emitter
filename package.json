@@ -59,6 +59,11 @@
     "typing",
     "emitDecoratorMetadata",
     "metadata",
-    "auto"
+    "auto",
+    "nestjs",
+    "decorators",
+    "inject",
+    "injection",
+    "ioc"
   ]
 }

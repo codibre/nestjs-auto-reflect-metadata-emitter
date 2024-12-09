@@ -1,3 +1,10 @@
+## [1.2.7](https://github.com/codibre/nestjs-auto-reflect-metadata-emitter/compare/v1.2.6...v1.2.7) (2024-12-09)
+
+
+### Bug Fixes
+
+* emitting all concrete imports ([ed66276](https://github.com/codibre/nestjs-auto-reflect-metadata-emitter/commit/ed66276238fa13f1f4601c81dc5dece55ebf4b96))
+
 ## [1.2.6](https://github.com/codibre/nestjs-auto-reflect-metadata-emitter/compare/v1.2.5...v1.2.6) (2024-12-07)
 
 

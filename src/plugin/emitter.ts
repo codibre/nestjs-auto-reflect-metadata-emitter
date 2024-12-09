@@ -148,7 +148,7 @@ export function before() {
         try {
           if (
             tsBinary.isImportClause(node) &&
-            mustImport.has(node) &&
+            // mustImport.has(node) && // TODO: Better mustImport filling later. Some imports are being left out
             moduleExists(sf, (node.parent.moduleSpecifier as any).text)
           ) {
             const { namedBindings } = node;

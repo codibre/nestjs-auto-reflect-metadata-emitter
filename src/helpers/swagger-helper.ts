@@ -1,6 +1,9 @@
 import { fluentObject } from '@codibre/fluent-iterable';
 import { ObjectKeyType } from 'is-this-a-pigeon';
-import { applyPropertyAndMethodsDecorators, DEFAULT } from 'src/decorator-helpers';
+import {
+  applyPropertyAndMethodsDecorators,
+  DEFAULT,
+} from 'src/decorator-helpers';
 import { getClassMetadata } from 'src/meta-info';
 import { ClassType } from 'src/meta-type';
 
@@ -19,11 +22,11 @@ let swagger: { ApiProperty: Function };
 export function defineAllApiProperties(dto: Record<ObjectKeyType, object>) {
   swagger ??= require('@nestjs/swagger');
   fluentObject(dto)
-  .map((x) => getClassMetadata(x[1] as ClassType))
-  .filter()
-  .forEach((meta) => {
-    applyPropertyAndMethodsDecorators(meta, {
-      [DEFAULT]: [swagger.ApiProperty()],
+    .map((x) => getClassMetadata(x[1] as ClassType))
+    .filter()
+    .forEach((meta) => {
+      applyPropertyAndMethodsDecorators(meta, {
+        [DEFAULT]: [swagger.ApiProperty()],
+      });
     });
-  });
 }

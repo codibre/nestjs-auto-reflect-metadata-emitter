@@ -12,9 +12,7 @@ const noKeys = new Set<ObjectKeyType>();
  * the informed object removed.
  * @param obj the object
  */
-export function removeUnknownProperties<T>(
-  obj: T,
-): T;
+export function removeUnknownProperties<T>(obj: T): T;
 /**
  * Return a new object with all keys not belonged to the class type of
  * the informed object removed. Additionally, removes other keys
@@ -34,7 +32,9 @@ export function removeUnknownProperties<T, K extends ObjectKeyType = NoKey>(
   prohibitedKeyList: Set<ObjectKeyType> = noKeys,
 ): K extends NoKey | ObjectKeyType ? T : RecursiveOmit<T, K> {
   if (Array.isArray(obj)) {
-    return obj.map((x) => removeUnknownProperties(x, prohibitedKeyList)) as K extends NoKey | ObjectKeyType ? T : RecursiveOmit<T, K>;
+    return obj.map((x) =>
+      removeUnknownProperties(x, prohibitedKeyList),
+    ) as K extends NoKey | ObjectKeyType ? T : RecursiveOmit<T, K>;
   }
   if (typeof obj !== 'object' || obj === null) {
     return obj as K extends NoKey | ObjectKeyType ? T : RecursiveOmit<T, K>;
@@ -44,9 +44,13 @@ export function removeUnknownProperties<T, K extends ObjectKeyType = NoKey>(
   );
   const result = fluentObject(obj)
     .filter(
-      ([k]) => !prohibitedKeyList.has(k) && (meta?.properties.has(k as string) ?? true),
+      ([k]) =>
+        !prohibitedKeyList.has(k) &&
+        (meta?.properties.has(k as string) ?? true),
     )
-    .toObject(0, (x) => removeUnknownProperties(x[1], prohibitedKeyList)) as K extends NoKey | ObjectKeyType ? T : RecursiveOmit<T, K>;
+    .toObject(0, (x) =>
+      removeUnknownProperties(x[1], prohibitedKeyList),
+    ) as K extends NoKey | ObjectKeyType ? T : RecursiveOmit<T, K>;
   Object.setPrototypeOf(result, obj.constructor);
   return result;
 }

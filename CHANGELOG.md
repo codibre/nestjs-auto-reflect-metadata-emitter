@@ -1,3 +1,10 @@
+## [1.2.9](https://github.com/codibre/nestjs-auto-reflect-metadata-emitter/compare/v1.2.8...v1.2.9) (2025-01-13)
+
+
+### Bug Fixes
+
+* exporting RecursiveOmit to prevent explict declaration ([a05056d](https://github.com/codibre/nestjs-auto-reflect-metadata-emitter/commit/a05056d73f6e95fffb01cc963e0bf4d69d40052f))
+
 ## [1.2.8](https://github.com/codibre/nestjs-auto-reflect-metadata-emitter/compare/v1.2.7...v1.2.8) (2025-01-13)
 
 

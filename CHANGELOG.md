@@ -1,3 +1,10 @@
+## [1.2.8](https://github.com/codibre/nestjs-auto-reflect-metadata-emitter/compare/v1.2.7...v1.2.8) (2025-01-13)
+
+
+### Bug Fixes
+
+* creating nestjs helpers for cqrs and swagger ([d6869e9](https://github.com/codibre/nestjs-auto-reflect-metadata-emitter/commit/d6869e9ff7b457f2b94644cda2b13b3bff56dada))
+
 ## [1.2.7](https://github.com/codibre/nestjs-auto-reflect-metadata-emitter/compare/v1.2.6...v1.2.7) (2024-12-09)
 
 

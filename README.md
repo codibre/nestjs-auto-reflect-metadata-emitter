@@ -26,10 +26,13 @@ As I said, this is a @nestjs/cli plugin, so you need to use nest build to compil
 Now, to use this plugin, do the following steps:
 
 * Install the plugin:
+
 ```
   npm i -D nestjs-auto-reflect-metadata-emitter
 ```
+
 * Add the plugin in the **.nest-cli.json**
+
 ```json
   "compilerOptions": {
     "plugins": [
@@ -37,11 +40,14 @@ Now, to use this plugin, do the following steps:
     ]
   }
 ```
+
 * Make sure tsconfig is set with the following properties:
+
 ```ts
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
 ```
+
 * Use, at least, **typescript 5.3.3**.
 * Compile your application using nest build, and test it using nest start
 
@@ -50,8 +56,6 @@ Now, to use this plugin, do the following steps:
 Metadata of all classes is accessible through the method **getClassMetadata**, where you just need to inform the class which you want the metadata of.
 You can also iterate over all metadata registered through **iterateMetadata**.
 Finally, metadata may be a sensitive data of your application, so, you can erase all its information using **clearAllMetadata**. We recommend you to do so, if you use this library, don't keep any hard logic depending on what this package will register, just construct whenever you need and clear it all at the end.
-
-
 
 ## How to use it with Jest?
 
@@ -77,6 +81,7 @@ This will be enough to make it apply it during transpilation.
 One of the advantages of having all this metadata emitted is that you can apply decorators for existing classes in separated scopes! To do that, there're two helper functions this library offers:
 
 the first one is **applyPropertyAndMethodsDecorators**:
+
 ```ts
 applyPropertyAndMethodsDecorators(MyClass, {
   prop1: [
@@ -118,6 +123,34 @@ export function prepareCommandHandlers(handlers: ClassType<ICommandHandler>[]) {
     if (command) applyClassDecorators(cls, [CommandHandler(command)])
   }
 }
+```
+
+## How to decorate query and command handlers implicitly
+
+Nestjs requires you to decorate each command handler with @CommandHandler and each query handler with @QueryHandler, but, if you want to let your application layer clear of nestjs references for a more implicit approach, when using this package ATS you can just put something like this in your module declararion:
+
+```typescript
+import { defineCommandHandlers, defineQueryHandlers } from 'nestjs-auto-reflect-metadata-emitter';
+import * as commandsHandlers from './application/command/handlers';
+import * as queryHandlers from './application/query/handlers';
+
+defineCommandHandlers(commandHandlers);
+defineQueryHandlers(queryHandlers);
+```
+
+This will automatically decorates all your handlers correctly. You just need to watch out to only export handlers in the indexes of the imported folders;
+
+# How to expose all my DTO properties in my API
+
+Adding something like this to your code will decorate automatically All your dtos with the decorator @ApiProperty, from @nestjs/swagger:
+
+```typescript
+import {
+  defineAllApiProperties,
+} from 'nestjs-auto-reflect-metadata-emitter';
+import * as dto from './dto';
+
+defineAllApiProperties(dto);
 ```
 
 ## What we're not doing yet.

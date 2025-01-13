@@ -37,7 +37,17 @@
     "typescript": "^5.3.3"
   },
   "peerDependencies": {
-    "reflect-metadata": "*"
+    "reflect-metadata": "*",
+    "@nestjs/cqrs": "*",
+    "@nestjs/swagger": "*"
+  },
+  "peerDependenciesMeta": {
+    "@nestjs/cqrs": {
+      "optional": true
+    },
+    "@nestjs/swagger": {
+      "optional": true
+    }
   },
   "contributors": [
     "Thiago O Santos <tos.oliveira@gmail.com>"
@@ -65,5 +75,9 @@
     "inject",
     "injection",
     "ioc"
-  ]
+  ],
+  "dependencies": {
+    "@codibre/fluent-iterable": "^1.39.1",
+    "is-this-a-pigeon": "^0.11.0"
+  }
 }

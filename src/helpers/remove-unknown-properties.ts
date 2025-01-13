@@ -7,6 +7,8 @@ declare const noKey: unique symbol;
 type NoKey = typeof noKey;
 const noKeys = new Set<ObjectKeyType>();
 
+export { RecursiveOmit, ObjectKeyType };
+
 /**
  * Returns a new object with all keys not belonged to the class type of
  * the informed object removed.

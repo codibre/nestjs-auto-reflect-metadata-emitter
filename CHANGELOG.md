@@ -1,3 +1,10 @@
+## [1.2.10](https://github.com/codibre/nestjs-auto-reflect-metadata-emitter/compare/v1.2.9...v1.2.10) (2025-08-17)
+
+
+### Bug Fixes
+
+* enabling later is-this-a-pigeon ([c16c43f](https://github.com/codibre/nestjs-auto-reflect-metadata-emitter/commit/c16c43f9a7ee3437a741af5dc0efecf5609e5fbb))
+
 ## [1.2.9](https://github.com/codibre/nestjs-auto-reflect-metadata-emitter/compare/v1.2.8...v1.2.9) (2025-01-13)
 
 

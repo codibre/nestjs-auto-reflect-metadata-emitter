@@ -78,6 +78,6 @@
   ],
   "dependencies": {
     "@codibre/fluent-iterable": "^1.39.1",
-    "is-this-a-pigeon": "^0.11.0"
+    "is-this-a-pigeon": ">=0.11.0"
   }
 }
